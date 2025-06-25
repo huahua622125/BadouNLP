@@ -1,0 +1,21 @@
+from transformers import BertModel
+
+model = BertModel.from_pretrained(r"D:\深度学习课件资料\正式深度学习文件\week6 语言模型和预训练\bert-base-chinese\bert-base-chinese")
+state_dict = model.state_dict()
+
+total_params = 0
+for param_name, param_tensor in state_dict.items():
+    # 计算当前参数的元素数量
+    param_count = param_tensor.numel()
+    total_params += param_count
+
+    # 打印参数名称和形状
+    print(f"{param_name}: {param_tensor.shape} ({param_count:,} 参数数量)")
+
+print(f"\nBERT-base 总参数量: {total_params:,}")  # 输出: 102,482,240
+
+#.numel()	计算元素总数	int
+#.shape	获取张量形状（各维度大小）	torch.Size
+#.size()	同.shape，返回形状	torch.Size
+#.dim()	获取张量维度数（rank）	int
+#.nelement()	同.numel()（旧版本兼容）	int
